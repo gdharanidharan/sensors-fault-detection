@@ -1,6 +1,6 @@
 import pymongo
 from sensor.constant.database import DATABASE_NAME
-# from sensor.constant.env_variable import MONGODB_URL_KEY
+from sensor.constant.env_variable import MONGODB_URL_KEY
 import certifi
 import os
 
