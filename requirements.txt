@@ -4,5 +4,5 @@ scikit-learn==1.1.3
 PyYAML
 scipy
 dill
-imblearn
+imblearn==0.0.0
 -e .

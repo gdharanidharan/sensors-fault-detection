@@ -3,11 +3,13 @@ from sensor.logger import logging
 from sensor.entity.config_entity import DataIngestionConfig
 from sensor.entity.artifact_entity import DataIngestionArtifact
 from sklearn.model_selection import train_test_split
-import os,sys
 from pandas import DataFrame
+import sys, os
 from sensor.data_access.sensor_data import SensorData
 from sensor.utils.main_utils import read_yaml_file
 from sensor.constant.training_pipeline import SCHEMA_FILE_PATH
+
+
 class DataIngestion:
 
     def __init__(self,data_ingestion_config:DataIngestionConfig):
@@ -27,7 +29,7 @@ class DataIngestion:
             dataframe = sensor_data.export_collection_as_dataframe(collection_name=self.data_ingestion_config.collection_name)
             feature_store_file_path = self.data_ingestion_config.feature_store_file_path            
 
-            # creating feature store folder and saving file (sensor.csv)
+            #creating folder
             dir_path = os.path.dirname(feature_store_file_path)
             os.makedirs(dir_path,exist_ok=True)
             dataframe.to_csv(feature_store_file_path,index=False,header=True)
