@@ -95,3 +95,30 @@ class ModelTrainerConfig:
         self.expected_accuracy: float = training_pipeline.MODEL_TRAINER_EXPECTED_SCORE # 0.6
         self.overfitting_underfitting_threshold = training_pipeline.MODEL_TRAINER_OVER_FIITING_UNDER_FITTING_THRESHOLD # 0.05
 
+
+class ModelEvaluationConfig:
+
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_evaluation_dir: str = os.path.join(
+            training_pipeline_config.artifact_dir, training_pipeline.MODEL_EVALUATION_DIR_NAME
+        ) # artifact/timestamp/model_evaluation
+
+        self.report_file_path = os.path.join(self.model_evaluation_dir,training_pipeline.MODEL_EVALUATION_REPORT_NAME
+        ) # artifact/timestamp/model_evaluation/report.yaml
+
+        self.change_threshold = training_pipeline.MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE # 0.02
+
+
+class ModelPusherConfig:
+
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_evaluation_dir: str = os.path.join(
+            training_pipeline_config.artifact_dir, training_pipeline.MODEL_PUSHER_DIR_NAME
+        ) # artifact/timestamp/model_pusher
+
+        self.model_file_path = os.path.join(self.model_evaluation_dir,training_pipeline.MODEL_FILE_NAME)
+         # artifact/timestamp/model_pusher/model.pkl
+
+        timestamp = round(datetime.now().timestamp()) # timestamp
+        self.saved_model_path=os.path.join(training_pipeline.SAVED_MODEL_DIR,f"{timestamp}",training_pipeline.MODEL_FILE_NAME)
+        # saved_models/timestamp/model.pkl
